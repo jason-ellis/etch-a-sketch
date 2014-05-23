@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	var $squares;
+	var mode = "normal";
 	// Create new Pad
 	function newPad(padSize) {
 		// Canvas is a "pad" made up of "squares"
@@ -10,8 +11,6 @@ $(document).ready(function() {
 		// Clear existing squares before creating new squares
 		$sketchpad.html("");
 		
-		console.log(padHeight);
-		console.log(padWidth);
 		for(var i = 0; i < padSize*padSize; i++) {
 			$($sketchpad).append("<div class='square'></div>");
 		};
@@ -26,15 +25,42 @@ $(document).ready(function() {
 	newPad(16);
 	
 	function squareHover() {
-		$($squares).mouseenter(function() {
-			$(this).css("background-color", "darkgray");
-		});
-	};
+		if(mode == "normal") {
+			$($squares).mouseenter(function() {
+				$(this).css("background-color", "darkgray");
+			});
+		}
+		else if(mode == "random") {
+			$($squares).mouseenter(function() {
+				$(this).css("background-color", getRandomColor());
+			});
+		};
+	}; // end squareHover
 	
 	$("#reset:button").click(function() {
-		console.log("made it to submit");
-		var newPadSize = prompt("Please enter a new pad size.");
+		var newPadSize = prompt("Please enter a new size.");
 		newPad(newPadSize);
-	});
+	}); // end reset button click
+
+	$("#normal:button").click(function() {
+		mode = "normal";
+		var newPadSize = prompt("Please enter a new size.");
+		newPad(newPadSize);
+	}); // end normal button click
+
+	$("#random:button").click(function() {
+		mode = "random"
+		var newPadSize = prompt("Please enter a new size.");
+		newPad(newPadSize);
+	}); // end random button click
+
+	function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 	
 }); // end ready
