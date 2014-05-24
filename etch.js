@@ -7,23 +7,30 @@ $(document).ready(function() {
 		var $sketchpad = $("#sketchpad");
 		var padHeight = $($sketchpad).height();
 		var padWidth = $($sketchpad).width();
-		
+
 		// Clear existing squares before creating new squares
 		$sketchpad.html("");
-		
-		for(var i = 0; i < padSize*padSize; i++) {
-			$($sketchpad).append("<div class='square'></div>");
+
+		var padRow = "";
+
+		for(var i = 0; i < padSize; i++) {
+			padRow += "<div class='square'></div>";
 		};
-		$squares = $(".square");
+
+		for(var i = 0; i < padSize; i++) {
+			$($sketchpad).append(padRow);
+		};
+
+		$squares = $("div .square");
 		var squareH = (padHeight / padSize) + "px";
 		var squareW = (padWidth / padSize) + "px";
 		$($squares).css("height", squareH);
 		$($squares).css("width", squareW);
 		squareHover();
 	}; // end newPad
-	
+
 	newPad(16);
-	
+
 	function squareHover() {
 		if(mode == "normal") {
 			$($squares).mouseenter(function() {
@@ -36,7 +43,7 @@ $(document).ready(function() {
 			});
 		};
 	}; // end squareHover
-	
+
 	$("#reset:button").click(function() {
 		do {
 			var newPadSize = prompt("Please enter a new size.");
@@ -64,12 +71,12 @@ $(document).ready(function() {
 	}); // end random button click
 
 	function getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-	
+    	var letters = '0123456789ABCDEF'.split('');
+    	var color = '#';
+    	for (var i = 0; i < 6; i++ ) {
+        	color += letters[Math.floor(Math.random() * 16)];
+    	}
+    	return color;
+	}; // end getRandomColor
+
 }); // end ready
