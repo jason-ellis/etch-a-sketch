@@ -38,20 +38,29 @@ $(document).ready(function() {
 	}; // end squareHover
 	
 	$("#reset:button").click(function() {
-		var newPadSize = prompt("Please enter a new size.");
-		newPad(newPadSize);
+		do {
+			var newPadSize = prompt("Please enter a new size.");
+			newPad(newPadSize);
+		}
+		while (isNaN(newPadSize));
 	}); // end reset button click
 
 	$("#normal:button").click(function() {
 		mode = "normal";
-		var newPadSize = prompt("Please enter a new size.");
-		newPad(newPadSize);
+		do {
+			var newPadSize = prompt("Please enter a new size.");
+			newPad(newPadSize);
+		}
+		while (isNaN(newPadSize));
 	}); // end normal button click
 
 	$("#random:button").click(function() {
-		mode = "random"
-		var newPadSize = prompt("Please enter a new size.");
-		newPad(newPadSize);
+		mode = "random";
+		do {
+			var newPadSize = prompt("Please enter a new size.");
+			newPad(newPadSize);
+		}
+		while (isNaN(newPadSize));
 	}); // end random button click
 
 	function getRandomColor() {
